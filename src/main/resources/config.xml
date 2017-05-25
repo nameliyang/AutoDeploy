@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config>
+    <threadPoolSize default="5">3</threadPoolSize>
+    <servers>
+        <server>
+            <host>192.168.199.120</host>
+            <userName>root</userName> 
+            <password>liyang</password>
+            <uploads>
+                <upload>
+                    <local>E:\deploy\test\MyTest.war</local> 
+                    <remote>/home/liyang/tomcat7/webapps</remote>
+                </upload>
+            </uploads>
+            <commands>
+			    <command>cd /home/liyang/tomcat7/bin</command>
+                <command>./startup.sh</command>
+            </commands>
+			<!--
+            <verify requestCount="51" timeDelay="20000" timeGap="2000">
+                <httpapi method="get" url="http://xxx/app/info"/>
+                <httpapi method="post" url="http://xxx/test/testPost">
+                    <param key="aaa">000</param>
+                    <param key="bbb">111</param>
+                </httpapi>
+            </verify>-->
+        </server>
+    </servers>
+</config>

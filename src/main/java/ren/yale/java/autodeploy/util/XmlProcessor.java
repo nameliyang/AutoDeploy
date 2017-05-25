@@ -1,20 +1,23 @@
 package ren.yale.java.autodeploy.util;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
 import ren.yale.java.autodeploy.deploy.AutoDeploy;
 import ren.yale.java.autodeploy.deploy.AutoDeplyBuilder;
 import ren.yale.java.autodeploy.http.HttpGet;
 import ren.yale.java.autodeploy.http.HttpMethod;
 import ren.yale.java.autodeploy.http.HttpPost;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Yale on 2016/12/17.
@@ -205,11 +208,14 @@ public enum XmlProcessor {
     }
 
     public XmlProcessor parse(String xmlPath)throws Exception{
-
-
+    	URL xmlURL  = XmlProcessor.class.getClassLoader().getResource(xmlPath);
+    	if(xmlURL==null){
+    		throw new RuntimeException("can't find file "+xmlPath);
+    	}
+    	String xmlInputStream = xmlURL.getPath();
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = dbf.newDocumentBuilder();
-        Document document = db.parse(xmlPath);
+        Document document = db.parse(xmlInputStream);
 
         getThreadPoolSize(document);
         NodeList servers =  document.getElementsByTagName("server");

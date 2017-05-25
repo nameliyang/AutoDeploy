@@ -3,8 +3,6 @@ package ren.yale.java.autodeploy;
 import ren.yale.java.autodeploy.deploy.AutoDeployManager;
 import ren.yale.java.autodeploy.util.LogUtils;
 
-import java.io.File;
-
 /**
  * Created by Yale on 2016/12/17.
  */

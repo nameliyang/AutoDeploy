@@ -1,28 +1,32 @@
 package ren.yale.java.autodeploy.deploy;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import ch.ethz.ssh2.Connection;
 import ch.ethz.ssh2.SCPClient;
 import ch.ethz.ssh2.Session;
 import ch.ethz.ssh2.StreamGobbler;
 import ch.ethz.ssh2.util.SCPClientTransformListener;
-import ren.yale.java.autodeploy.Main;
-import ren.yale.java.autodeploy.http.HttpGet;
 import ren.yale.java.autodeploy.http.HttpMethod;
 import ren.yale.java.autodeploy.http.HttpPost;
 import ren.yale.java.autodeploy.util.FileUtils;
 import ren.yale.java.autodeploy.util.LogUtils;
 import ren.yale.java.autodeploy.util.ZipFileUtils;
 
-import java.io.*;
-import java.util.*;
-import java.util.concurrent.CopyOnWriteArrayList;
-
 /**
  * Created by Yale on 2016/12/17.
  */
 public class AutoDeploy implements IAutoDeployAction{
-
-
 
     String host;
     String usrName;
@@ -318,4 +322,12 @@ public class AutoDeploy implements IAutoDeployAction{
         void finish();
         void verifySucess(List<String> log);
     }
+
+	@Override
+	public String toString() {
+		return "AutoDeploy [host=" + host + ", usrName=" + usrName + ", password=" + password + ", mapUpload="
+				+ mapUpload + ", commandList=" + commandList + ", zipFileList=" + zipFileList + ", apis=" + apis
+				+ ", conn=" + conn + ", logUtils=" + logUtils + ", autoDeployListener=" + autoDeployListener
+				+ ", isFinish=" + isFinish + "]";
+	}
 }

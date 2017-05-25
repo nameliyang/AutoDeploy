@@ -30,33 +30,32 @@ public enum  AutoDeployManager {
 
 
     public void start(){
-
-
         executor = Executors.newFixedThreadPool(XmlProcessor.SELF.getThreadPoolSize());
-
-        for (final AutoDeploy a:autoDeployList) {
-
-            executor.execute(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        a.start(new AutoDeploy.AutoDeployListener() {
-                            @Override
-                            public void finish() {
-                                finishLog();
-                            }
-
-                            @Override
-                            public void verifySucess(List<String> logs) {
-                                verifyLog(logs);
-                            }
-                        });
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-        }
+        System.out.println(autoDeployList);
+//
+//        for (final AutoDeploy a:autoDeployList) {
+//
+//            executor.execute(new Runnable() {
+//                @Override
+//                public void run() {
+//                    try {
+//                        a.start(new AutoDeploy.AutoDeployListener() {
+//                            @Override
+//                            public void finish() {
+//                                finishLog();
+//                            }
+//
+//                            @Override
+//                            public void verifySucess(List<String> logs) {
+//                                verifyLog(logs);
+//                            }
+//                        });
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            });
+//        }
 
     }
     private void verifyLog(List<String> log){
