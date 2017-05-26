@@ -1,10 +1,8 @@
-package ren.yale.java.autodeploy.util;
+package com.ly.java.autodeploy.util;
 
 import java.util.Vector;
 
-/**
- * Created by Yale on 2016/12/17.
- */
+
 public class  LogUtils {
 
     public static Vector<LogUtils> logUtilsVector = new Vector<LogUtils>();

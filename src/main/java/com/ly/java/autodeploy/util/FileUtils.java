@@ -1,10 +1,7 @@
-package ren.yale.java.autodeploy.util;
+package com.ly.java.autodeploy.util;
 
 import java.io.File;
 
-/**
- * Created by Yale on 2017/1/3.
- */
 public class FileUtils {
 
     public static void deleteFile(File  file) {
@@ -20,7 +17,6 @@ public class FileUtils {
     }
 
     public static void deleteFile(String filePath){
-
         try{
             File file = new File(filePath);
             deleteFile(file);

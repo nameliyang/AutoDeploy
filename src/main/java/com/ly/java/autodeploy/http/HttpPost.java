@@ -1,15 +1,10 @@
-package ren.yale.java.autodeploy.http;
+package com.ly.java.autodeploy.http;
 
-import java.util.List;
 import java.util.Map;
 
-/**
- * Created by Yale on 2016/12/20.
- */
 public class HttpPost extends HttpMethod {
-
-
     Map<String,String> map;
+    
     @Override
     public String execute() {
         return HttpClient.post(mUrl,map);

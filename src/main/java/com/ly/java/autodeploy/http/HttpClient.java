@@ -1,31 +1,21 @@
-package ren.yale.java.autodeploy.http;
+package com.ly.java.autodeploy.http;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
-/**
- * Created by Yale on 2016/12/20.
- */
+
 public class HttpClient {
-
-
     public static String get(String url) {
-
         StringBuffer sb = new StringBuffer();
         try{
             URL u = new URL(url);
             HttpURLConnection connection = (HttpURLConnection) u.openConnection();
             connection.setReadTimeout(10000);
             connection.setConnectTimeout(10000);
-
             connection.connect();
             BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(),"utf-8"));
             String line ="";
@@ -33,9 +23,8 @@ public class HttpClient {
                 sb.append(line);
             }
             br.close();
-
         }catch (Exception e){
-
+        	
         }
         return sb.toString();
     }
@@ -92,7 +81,7 @@ public class HttpClient {
             }
 
         }catch (Exception e){
-
+        	e.printStackTrace();
         }
         return sb.toString();
 

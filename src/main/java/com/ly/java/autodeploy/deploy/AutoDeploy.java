@@ -1,4 +1,4 @@
-package ren.yale.java.autodeploy.deploy;
+package com.ly.java.autodeploy.deploy;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -12,19 +12,22 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.ly.java.autodeploy.http.HttpMethod;
+import com.ly.java.autodeploy.http.HttpPost;
+import com.ly.java.autodeploy.util.FileUtils;
+import com.ly.java.autodeploy.util.LogUtils;
+import com.ly.java.autodeploy.util.ZipFileUtils;
+
 import ch.ethz.ssh2.Connection;
 import ch.ethz.ssh2.SCPClient;
 import ch.ethz.ssh2.Session;
 import ch.ethz.ssh2.StreamGobbler;
 import ch.ethz.ssh2.util.SCPClientTransformListener;
-import ren.yale.java.autodeploy.http.HttpMethod;
-import ren.yale.java.autodeploy.http.HttpPost;
-import ren.yale.java.autodeploy.util.FileUtils;
-import ren.yale.java.autodeploy.util.LogUtils;
-import ren.yale.java.autodeploy.util.ZipFileUtils;
 
 /**
- * Created by Yale on 2016/12/17.
+ * 
+ * @author liyang
+ *
  */
 public class AutoDeploy implements IAutoDeployAction{
 
@@ -49,7 +52,6 @@ public class AutoDeploy implements IAutoDeployAction{
 
 
     public void setServerInfo(String host, String usrName, String password) {
-
         this.host = host;
         this.usrName = usrName;
         this.password = password;
@@ -66,6 +68,7 @@ public class AutoDeploy implements IAutoDeployAction{
     public void setVerifyApi(List<HttpMethod> apis){
         this.apis = apis;
     }
+    
     public void start(AutoDeploy.AutoDeployListener autoDeployListener) throws Exception{
         this.autoDeployListener =autoDeployListener;
         long  startTime = System.currentTimeMillis();
@@ -76,7 +79,6 @@ public class AutoDeploy implements IAutoDeployAction{
         command();
         logUtils.setUsedTime((int) (System.currentTimeMillis()-startTime));
         close();
-
     }
 
     private String getRemoteParentPath(String remotePath){
@@ -325,7 +327,7 @@ public class AutoDeploy implements IAutoDeployAction{
 
 	@Override
 	public String toString() {
-		return "AutoDeploy [host=" + host + ", usrName=" + usrName + ", password=" + password + ", mapUpload="
+		return "AutoDeploy [host=" + host + ", usrName=" + usrName + ", password=" + password+ ", mapUpload="
 				+ mapUpload + ", commandList=" + commandList + ", zipFileList=" + zipFileList + ", apis=" + apis
 				+ ", conn=" + conn + ", logUtils=" + logUtils + ", autoDeployListener=" + autoDeployListener
 				+ ", isFinish=" + isFinish + "]";

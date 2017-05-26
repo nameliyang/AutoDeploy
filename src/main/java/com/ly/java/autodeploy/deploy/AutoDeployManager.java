@@ -1,63 +1,69 @@
-package ren.yale.java.autodeploy.deploy;
-
-import ren.yale.java.autodeploy.util.LogUtils;
-import ren.yale.java.autodeploy.util.XmlProcessor;
+package com.ly.java.autodeploy.deploy;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-/**
- * Created by Yale on 2016/12/18.
- */
-public enum  AutoDeployManager {
-    SELF;
+import com.ly.java.autodeploy.util.LogUtils;
+import com.ly.java.autodeploy.util.XmlProcessor;
+
+public class  AutoDeployManager {
+	private static volatile AutoDeployManager instance;
     private  ExecutorService executor;
     private  List<AutoDeploy> autoDeployList;
-
     private long startTime = 0;
+    
     List<List<String>> verifyListLogs = new ArrayList<List<String>>();
-
-
-    public AutoDeployManager loadXML(String xmlPath) throws Exception{
-        startTime = System.currentTimeMillis();
-        autoDeployList  = XmlProcessor.SELF.parse(xmlPath).getAutoDeployList();
-        return this;
+    
+    private static final XmlProcessor xmlProcessor = new XmlProcessor();
+    
+    public static  AutoDeployManager getInstance(String xmlPath) throws Exception{
+    	if(instance == null){
+    		synchronized (AutoDeployManager.class) {
+    			if(instance==null){
+    				instance = new AutoDeployManager();
+    				instance.startTime = System.currentTimeMillis();
+    				
+    				instance.autoDeployList  =xmlProcessor.parse(xmlPath).getAutoDeployList();
+    			}
+			}
+    	}
+    	return instance;
     }
+    
 
 
     public void start(){
-        executor = Executors.newFixedThreadPool(XmlProcessor.SELF.getThreadPoolSize());
+        executor = Executors.newFixedThreadPool(xmlProcessor.getThreadPoolSize());
         System.out.println(autoDeployList);
-//
-//        for (final AutoDeploy a:autoDeployList) {
-//
-//            executor.execute(new Runnable() {
-//                @Override
-//                public void run() {
-//                    try {
-//                        a.start(new AutoDeploy.AutoDeployListener() {
-//                            @Override
-//                            public void finish() {
-//                                finishLog();
-//                            }
-//
-//                            @Override
-//                            public void verifySucess(List<String> logs) {
-//                                verifyLog(logs);
-//                            }
-//                        });
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            });
-//        }
+
+        for (final AutoDeploy a:autoDeployList) {
+
+            executor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        a.start(new AutoDeploy.AutoDeployListener() {
+                            @Override
+                            public void finish() {
+                                finishLog();
+                            }
+
+                            @Override
+                            public void verifySucess(List<String> logs) {
+                                verifyLog(logs);
+                            }
+                        });
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
 
     }
+    
     private void verifyLog(List<String> log){
         verifyListLogs.add(log);
         if (verifyListLogs.size() == getVerifySize()){

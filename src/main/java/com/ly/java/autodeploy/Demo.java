@@ -1,20 +1,17 @@
-package ren.yale.java.autodeploy;
-
-import ren.yale.java.autodeploy.deploy.AutoDeploy;
-import ren.yale.java.autodeploy.deploy.AutoDeplyBuilder;
-import ren.yale.java.autodeploy.http.HttpGet;
-import ren.yale.java.autodeploy.http.HttpMethod;
-import ren.yale.java.autodeploy.http.HttpPost;
-import ren.yale.java.autodeploy.util.XmlProcessor;
+package com.ly.java.autodeploy;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by Yale on 2016/12/19.
- */
+import com.ly.java.autodeploy.deploy.AutoDeploy;
+import com.ly.java.autodeploy.deploy.AutoDeplyBuilder;
+import com.ly.java.autodeploy.http.HttpGet;
+import com.ly.java.autodeploy.http.HttpMethod;
+import com.ly.java.autodeploy.http.HttpPost;
+import com.ly.java.autodeploy.util.XmlProcessor;
+
 public class Demo {
 
     public static void main(String args[]){

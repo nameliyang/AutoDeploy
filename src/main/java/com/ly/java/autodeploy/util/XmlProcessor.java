@@ -1,4 +1,4 @@
-package ren.yale.java.autodeploy.util;
+package com.ly.java.autodeploy.util;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -13,18 +13,14 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import ren.yale.java.autodeploy.deploy.AutoDeploy;
-import ren.yale.java.autodeploy.deploy.AutoDeplyBuilder;
-import ren.yale.java.autodeploy.http.HttpGet;
-import ren.yale.java.autodeploy.http.HttpMethod;
-import ren.yale.java.autodeploy.http.HttpPost;
+import com.ly.java.autodeploy.deploy.AutoDeploy;
+import com.ly.java.autodeploy.deploy.AutoDeplyBuilder;
+import com.ly.java.autodeploy.http.HttpGet;
+import com.ly.java.autodeploy.http.HttpMethod;
+import com.ly.java.autodeploy.http.HttpPost;
 
-/**
- * Created by Yale on 2016/12/17.
- */
-public enum XmlProcessor {
+public class  XmlProcessor {
 
-    SELF;
 
     private List<AutoDeploy> autoDeployList = new ArrayList<AutoDeploy>();
     private int threadPoolSize = 5;

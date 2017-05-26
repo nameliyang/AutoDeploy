@@ -1,4 +1,4 @@
-package ren.yale.java.autodeploy.util;
+package com.ly.java.autodeploy.util;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -6,9 +6,6 @@ import java.io.FileOutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-/**
- * Created by Yale on 2016/12/30.
- */
 public class ZipFileUtils {
 
     private static void writeZip(File file, String parentPath, ZipOutputStream zos) throws Exception{
@@ -20,9 +17,7 @@ public class ZipFileUtils {
                     writeZip(f, parentPath, zos);
                 }
             }else{
-                FileInputStream fis=null;
-
-
+                FileInputStream fis = null;
                 fis=new FileInputStream(file);
                 ZipEntry ze = new ZipEntry(parentPath + file.getName());
                 zos.putNextEntry(ze);
